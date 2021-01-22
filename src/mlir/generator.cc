@@ -8,7 +8,6 @@
 #include "mlir/Dialect/StandardOps/IR/Ops.h"
 #include "mlir/IR/Attributes.h"
 #include "mlir/IR/Dialect.h"
-#include "mlir/IR/StandardTypes.h"
 #include "mlir/IR/Types.h"
 
 namespace
@@ -811,6 +810,8 @@ namespace mlir::verona
     // Create function
     auto funcTy = builder.getFunctionType(types, retTy);
     auto func = mlir::FuncOp::create(loc, name, funcTy);
+    // FIXME: This needs to be set correctly later
+    func.setVisibility(mlir::SymbolTable::Visibility::Private);
     return functionTable.insert(name, func);
   }
 
